@@ -9,8 +9,8 @@
   <Project Path="FMODUnity.csproj" />
   <Project Path="Zenject-TestFramework.csproj" />
   <Project Path="FMODUnityHaptics.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Zenject-PoolMonitor-Editor.csproj" />
   <Project Path="FMODUnityResonance.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
 </Solution>
