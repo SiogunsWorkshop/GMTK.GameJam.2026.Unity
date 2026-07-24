@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class SummaryWindow : MonoBehaviour
@@ -14,6 +15,8 @@ public class SummaryWindow : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
     [SerializeField] private Button _quitButton;
+
+    [Inject] private readonly ProjectManager _projectManager;
 
     private void OnEnable()
     {
@@ -46,10 +49,13 @@ public class SummaryWindow : MonoBehaviour
     private void OnMenuButtonClicked()
     {
         _canvasGroup.interactable = false;
+        _projectManager.LoadScene(ProjectManager.SceneName.MenuScene);
+
     }
 
     private void OnRestartButtonClicked()
     {
         _canvasGroup.interactable = false;
+        _projectManager.LoadScene(ProjectManager.SceneName.GameScene);
     }
 }

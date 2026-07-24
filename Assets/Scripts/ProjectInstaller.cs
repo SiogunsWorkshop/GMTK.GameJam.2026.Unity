@@ -10,5 +10,6 @@ public class ProjectInstaller : MonoInstaller
         Container.Install<InputInstaller>();
 
         Container.Bind<LoadingWindow>().FromInstance(_loadingWindow).AsSingle();
+        Container.Bind<ProjectManager>().FromComponentInHierarchy().AsSingle();
     }
 }

@@ -21,12 +21,10 @@ public class MenuWindow : MonoBehaviour
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _quitButton;
 
-    [SerializeField] private string _playSceneName = "GameScene";
-
     private Tween _slideTween;
     private Canvas _canvas;
 
-    [Inject] private readonly LoadingWindow _loadingWindow;
+    [Inject] private readonly ProjectManager _projectManager;
 
     private const float SLIDE_DURATION = 0.5f;
 
@@ -106,18 +104,8 @@ public class MenuWindow : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         _canvasGroup.interactable = false;
-        HandlePlaySceneTransitionAsync().Forget();
+        _projectManager.LoadScene(ProjectManager.SceneName.GameScene);
     }
 
-    private async UniTaskVoid HandlePlaySceneTransitionAsync()
-    {
-        var loadScene = SceneManager.LoadSceneAsync(_playSceneName, LoadSceneMode.Single);
-        loadScene.allowSceneActivation = false;
 
-        UniTaskCompletionSource loadingScreenFadeInTCS = new();
-        _loadingWindow.Show(onComplete: () => loadingScreenFadeInTCS.TrySetResult());
-        await loadingScreenFadeInTCS.Task;
-
-        loadScene.allowSceneActivation = true;
-    }
 }
