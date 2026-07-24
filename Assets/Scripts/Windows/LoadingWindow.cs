@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class LoadingWindow : MonoBehaviour
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void Show(float onsetDuration = DEFAULT_FADE_DURATION)
+    public void Show(float onsetDuration = DEFAULT_FADE_DURATION, Action onComplete = null)
     {
         _fadeTween?.Kill();
         _canvasGroup.alpha = 0f;
@@ -25,6 +26,7 @@ public class LoadingWindow : MonoBehaviour
         if (onsetDuration <= 0f)
         {
             _canvasGroup.alpha = 1f;
+            onComplete?.Invoke();
             return;
         }
         _fadeTween = _canvasGroup
@@ -32,10 +34,11 @@ public class LoadingWindow : MonoBehaviour
             .OnComplete(() =>
             {
                 _canvasGroup.alpha = 1f;
+                onComplete?.Invoke();
             }).Play();
     }
 
-    public void Hide(float onsetDuration = DEFAULT_FADE_DURATION)
+    public void Hide(float onsetDuration = DEFAULT_FADE_DURATION, Action onComplete = null)
     {
         _fadeTween?.Kill();
         _canvasGroup.alpha = 1f;
@@ -45,6 +48,7 @@ public class LoadingWindow : MonoBehaviour
         if (onsetDuration <= 0f)
         {
             _canvasGroup.alpha = 0f;
+            onComplete?.Invoke();
             return;
         }
         _fadeTween = _canvasGroup
@@ -52,6 +56,7 @@ public class LoadingWindow : MonoBehaviour
             .OnComplete(() =>
             {
                 _canvasGroup.alpha = 0f;
+                onComplete?.Invoke();
             }).Play();
     }
 }

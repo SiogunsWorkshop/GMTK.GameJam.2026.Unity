@@ -1,8 +1,10 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -19,8 +21,12 @@ public class MenuWindow : MonoBehaviour
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _quitButton;
 
+    [SerializeField] private string _playSceneName = "GameScene";
+
     private Tween _slideTween;
     private Canvas _canvas;
+
+    [Inject] private readonly LoadingWindow _loadingWindow;
 
     private const float SLIDE_DURATION = 0.5f;
 
@@ -99,6 +105,19 @@ public class MenuWindow : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        throw new NotImplementedException();
+        _canvasGroup.interactable = false;
+        HandlePlaySceneTransitionAsync().Forget();
+    }
+
+    private async UniTaskVoid HandlePlaySceneTransitionAsync()
+    {
+        var loadScene = SceneManager.LoadSceneAsync(_playSceneName, LoadSceneMode.Single);
+        loadScene.allowSceneActivation = false;
+
+        UniTaskCompletionSource loadingScreenFadeInTCS = new();
+        _loadingWindow.Show(onComplete: () => loadingScreenFadeInTCS.TrySetResult());
+        await loadingScreenFadeInTCS.Task;
+
+        loadScene.allowSceneActivation = true;
     }
 }
