@@ -1,16 +1,22 @@
 using UnityEngine;
+using Zenject;
 
 public class MenuSceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Inject] private readonly LoadingWindow _loadingWindow;
 
-    // Update is called once per frame
-    void Update()
+    private static bool _firstTime = true;
+
+    private void Awake()
     {
-        
+        if (_firstTime)
+        {
+            _firstTime = false;
+            _loadingWindow.Hide(0f);
+        }
+        else
+        {
+            _loadingWindow.Hide();
+        }
     }
 }
