@@ -8,5 +8,4 @@
   <Project Path="Zenject-PoolMonitor-Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
