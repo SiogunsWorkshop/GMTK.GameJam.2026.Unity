@@ -126,3 +126,4 @@ fmod_editor.log
 
 # VS Code settings folder
 /.vscode
+.vsconfig
