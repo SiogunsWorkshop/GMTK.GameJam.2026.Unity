@@ -9,7 +9,8 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private UniversalBouncer _bouncer;
 
-    [SerializeField] private float _force = 4;
+    [SerializeField] private float _maxMovementVelocity;
+    [SerializeField] private float _movementForce = 0.5f;
     [SerializeField] private float _startForce = 0;
 
     private CancellationTokenSource _handleEnemyMovement;
@@ -55,8 +56,8 @@ public class EnemyMovement : MonoBehaviour
         while(token.IsCancellationRequested == false)
         {
             Debug.DrawRay((Vector2)gameObject.transform.position + ((Vector2)transform.right * 0.1f), _movementDirection, UnityEngine.Color.green);
-            if(_bouncer.Rigidbody.linearVelocity.magnitude < _force)
-                _bouncer.Rigidbody.AddForce(_movementDirection * 1, ForceMode2D.Force);
+            if(_bouncer.Rigidbody.linearVelocity.magnitude < _maxMovementVelocity)
+                _bouncer.Rigidbody.AddForce(_movementDirection * _movementForce, ForceMode2D.Force);
             await UniTask.Yield(PlayerLoopTiming.Update);
         }
     }
