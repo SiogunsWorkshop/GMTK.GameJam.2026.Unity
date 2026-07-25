@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: 2706299525238461093}
   - component: {fileID: 7403288041993472180}
   - component: {fileID: 6190988032762753697}
-  m_Layer: 0
+  - component: {fileID: 9185129730454366255}
+  m_Layer: 6
   m_Name: Player Bouncer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,3 +335,23 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9185129730454366255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385583074196441878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c77393389b7b7a42af6592f8dfced77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DetectBouncerInFrontComponent
+  <OnBouncerDetected>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  _bouncer: {fileID: 5713353652876355966}
+  _detectionDistance: 4
+  _detectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 55
