@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class UniversalBouncer : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidBody;
@@ -10,17 +11,13 @@ public class UniversalBouncer : MonoBehaviour
     [SerializeField] private float _force = 1;
 
     private CancellationTokenSource _handleBouncer;
+    private Vector2 _direction;
 
     private void Reset()
     {
-        if(gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D body) == false)
-        {
-            _rigidBody = gameObject.AddComponent<Rigidbody2D>();
-        }
-        if (gameObject.TryGetComponent<CircleCollider2D>(out CircleCollider2D colider) == false)
-        {
-            _collider = gameObject.AddComponent<CircleCollider2D>();
-        }
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
+
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         //_rigidbody.sharedMaterial = material here
         //_rigidBody.linearDamping = 1; //when fixed
@@ -39,7 +36,7 @@ public class UniversalBouncer : MonoBehaviour
     {
         UniTaskTools.KillToken(ref _handleBouncer);
     }
-    private Vector2 _direction;
+
     private async UniTask HandleBouncer(CancellationToken token)
     {
         while (token.IsCancellationRequested == false)
