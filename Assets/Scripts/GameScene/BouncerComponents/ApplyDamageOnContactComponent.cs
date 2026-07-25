@@ -2,12 +2,10 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(UniversalBouncer))]
-public class ApplyDamageOnContactComponent : MonoBehaviour
+public class ApplyDamageOnContactComponent : DamageComponent
 {
     [SerializeField] private UniversalBouncer _bouncer;
-    [SerializeField] private int _damageAmount = 1;
-
-    [SerializeField] private bool _allowFriendlyFire;
+    
 
     private void OnEnable()
     {
@@ -35,11 +33,5 @@ public class ApplyDamageOnContactComponent : MonoBehaviour
             return;
 
         otherHealth.TakeDamage(_damageAmount);
-    }
-
-    private bool CanBeDamaged(UniversalBouncer self, UniversalBouncer other)
-    {
-        bool sameTeam = self.Team == other.Team;
-        return !sameTeam || _allowFriendlyFire;
     }
 }

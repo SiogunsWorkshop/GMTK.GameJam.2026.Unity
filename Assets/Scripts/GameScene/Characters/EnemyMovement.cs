@@ -7,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(UniversalBouncer))]
 public class EnemyMovement : MonoBehaviour
 {
+    public Vector2 MovementDirection => _movementDirection;
+    public UniversalBouncer Bouncer => _bouncer;
+
     [SerializeField] private UniversalBouncer _bouncer;
 
     [SerializeField] private float _maxMovementVelocity = 6;
