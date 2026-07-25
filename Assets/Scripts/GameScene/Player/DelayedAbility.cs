@@ -2,6 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class DelayedAbility : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class DelayedAbility : MonoBehaviour
 
         while (timeLeft > 0f && !token.IsCancellationRequested)
         {
-            OnAbilityDelayUpdated.Invoke(timeLeft);
+            var normalizedProgress = Mathf.Clamp01(timeLeft / _delay);
+            OnAbilityDelayUpdated.Invoke(normalizedProgress);
             timeLeft -= Time.deltaTime;
             await UniTask.Yield(PlayerLoopTiming.Update);
         }
