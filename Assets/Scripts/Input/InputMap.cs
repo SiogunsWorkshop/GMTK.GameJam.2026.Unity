@@ -161,7 +161,7 @@ namespace Input
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1151,6 +1151,74 @@ namespace Input
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Abilities"",
+            ""id"": ""39531538-ad1f-45f6-bc5d-ddadfae827d0"",
+            ""actions"": [
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""72eb2035-a358-4c67-a87f-5492410ffedc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""013570f0-c842-4743-9dcc-d5c5d95c8a8e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9fcedf2-a15c-4d04-9359-2e6c8ad05d68"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""dc49497f-4c6c-485d-8386-77926411635b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8fa8229-bcde-4b95-8cd3-5c152430091c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2eabfc0a-c372-4a51-aba9-336d5d0dba7c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1242,6 +1310,11 @@ namespace Input
             // Movement
             m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
             m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
+            // Abilities
+            m_Abilities = asset.FindActionMap("Abilities", throwIfNotFound: true);
+            m_Abilities_Ability1 = m_Abilities.FindAction("Ability1", throwIfNotFound: true);
+            m_Abilities_Ability2 = m_Abilities.FindAction("Ability2", throwIfNotFound: true);
+            m_Abilities_Dash = m_Abilities.FindAction("Dash", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -1249,6 +1322,7 @@ namespace Input
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputMap.Player.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputMap.UI.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_Movement.enabled, "This will cause a leak and performance issues, InputMap.Movement.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_Abilities.enabled, "This will cause a leak and performance issues, InputMap.Abilities.Disable() has not been called.");
         }
 
         /// <summary>
@@ -1795,6 +1869,124 @@ namespace Input
         /// Provides a new <see cref="MovementActions" /> instance referencing this action map.
         /// </summary>
         public MovementActions @Movement => new MovementActions(this);
+
+        // Abilities
+        private readonly InputActionMap m_Abilities;
+        private List<IAbilitiesActions> m_AbilitiesActionsCallbackInterfaces = new List<IAbilitiesActions>();
+        private readonly InputAction m_Abilities_Ability1;
+        private readonly InputAction m_Abilities_Ability2;
+        private readonly InputAction m_Abilities_Dash;
+        /// <summary>
+        /// Provides access to input actions defined in input action map "Abilities".
+        /// </summary>
+        public struct AbilitiesActions
+        {
+            private @InputMap m_Wrapper;
+
+            /// <summary>
+            /// Construct a new instance of the input action map wrapper class.
+            /// </summary>
+            public AbilitiesActions(@InputMap wrapper) { m_Wrapper = wrapper; }
+            /// <summary>
+            /// Provides access to the underlying input action "Abilities/Ability1".
+            /// </summary>
+            public InputAction @Ability1 => m_Wrapper.m_Abilities_Ability1;
+            /// <summary>
+            /// Provides access to the underlying input action "Abilities/Ability2".
+            /// </summary>
+            public InputAction @Ability2 => m_Wrapper.m_Abilities_Ability2;
+            /// <summary>
+            /// Provides access to the underlying input action "Abilities/Dash".
+            /// </summary>
+            public InputAction @Dash => m_Wrapper.m_Abilities_Dash;
+            /// <summary>
+            /// Provides access to the underlying input action map instance.
+            /// </summary>
+            public InputActionMap Get() { return m_Wrapper.m_Abilities; }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+            public void Enable() { Get().Enable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+            public void Disable() { Get().Disable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+            public bool enabled => Get().enabled;
+            /// <summary>
+            /// Implicitly converts an <see ref="AbilitiesActions" /> to an <see ref="InputActionMap" /> instance.
+            /// </summary>
+            public static implicit operator InputActionMap(AbilitiesActions set) { return set.Get(); }
+            /// <summary>
+            /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <param name="instance">Callback instance.</param>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+            /// </remarks>
+            /// <seealso cref="AbilitiesActions" />
+            public void AddCallbacks(IAbilitiesActions instance)
+            {
+                if (instance == null || m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Add(instance);
+                @Ability1.started += instance.OnAbility1;
+                @Ability1.performed += instance.OnAbility1;
+                @Ability1.canceled += instance.OnAbility1;
+                @Ability2.started += instance.OnAbility2;
+                @Ability2.performed += instance.OnAbility2;
+                @Ability2.canceled += instance.OnAbility2;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+            }
+
+            /// <summary>
+            /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <remarks>
+            /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+            /// </remarks>
+            /// <seealso cref="AbilitiesActions" />
+            private void UnregisterCallbacks(IAbilitiesActions instance)
+            {
+                @Ability1.started -= instance.OnAbility1;
+                @Ability1.performed -= instance.OnAbility1;
+                @Ability1.canceled -= instance.OnAbility1;
+                @Ability2.started -= instance.OnAbility2;
+                @Ability2.performed -= instance.OnAbility2;
+                @Ability2.canceled -= instance.OnAbility2;
+                @Dash.started -= instance.OnDash;
+                @Dash.performed -= instance.OnDash;
+                @Dash.canceled -= instance.OnDash;
+            }
+
+            /// <summary>
+            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="AbilitiesActions.UnregisterCallbacks(IAbilitiesActions)" />.
+            /// </summary>
+            /// <seealso cref="AbilitiesActions.UnregisterCallbacks(IAbilitiesActions)" />
+            public void RemoveCallbacks(IAbilitiesActions instance)
+            {
+                if (m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            /// <summary>
+            /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+            /// </summary>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+            /// </remarks>
+            /// <seealso cref="AbilitiesActions.AddCallbacks(IAbilitiesActions)" />
+            /// <seealso cref="AbilitiesActions.RemoveCallbacks(IAbilitiesActions)" />
+            /// <seealso cref="AbilitiesActions.UnregisterCallbacks(IAbilitiesActions)" />
+            public void SetCallbacks(IAbilitiesActions instance)
+            {
+                foreach (var item in m_Wrapper.m_AbilitiesActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        /// <summary>
+        /// Provides a new <see cref="AbilitiesActions" /> instance referencing this action map.
+        /// </summary>
+        public AbilitiesActions @Abilities => new AbilitiesActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         /// <summary>
         /// Provides access to the input control scheme.
@@ -2023,6 +2215,35 @@ namespace Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMove(InputAction.CallbackContext context);
+        }
+        /// <summary>
+        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Abilities" which allows adding and removing callbacks.
+        /// </summary>
+        /// <seealso cref="AbilitiesActions.AddCallbacks(IAbilitiesActions)" />
+        /// <seealso cref="AbilitiesActions.RemoveCallbacks(IAbilitiesActions)" />
+        public interface IAbilitiesActions
+        {
+            /// <summary>
+            /// Method invoked when associated input action "Ability1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnAbility1(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Ability2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnAbility2(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnDash(InputAction.CallbackContext context);
         }
     }
 }
