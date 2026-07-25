@@ -8,6 +8,8 @@ public class ArenaController : MonoBehaviour
 
     [SerializeField] private EnvironmentalHazard _tutorialHazard;
 
+    private int _hazardCount = 1; // Default number of hazards to activate
+
     private void Awake()
     {
         foreach (var hazard in _environmentalHazards)
@@ -17,11 +19,11 @@ public class ArenaController : MonoBehaviour
         _tutorialHazard.gameObject.SetActive(true);
     }
 
-    public void RerollEnvironmentalHazards(int hazardCount)
+    public void RerollEnvironmentalHazards()
     {
         _tutorialHazard.gameObject.SetActive(false);
 
-        if (hazardCount <= 0 || _environmentalHazards.Count == 0)
+        if (_hazardCount <= 0 || _environmentalHazards.Count == 0)
         {
             foreach (var hazard in _activeHazards)
             {
@@ -34,7 +36,7 @@ public class ArenaController : MonoBehaviour
         var staleHazards = _environmentalHazards.FindAll(hazard => hazard != _tutorialHazard);
         var newHazards = new HashSet<EnvironmentalHazard>();
 
-        for (int i = 0; i < hazardCount; i++)
+        for (int i = 0; i < _hazardCount; i++)
         {
             int randomIndex = Random.Range(0, _environmentalHazards.Count);
             var selectedHazard = _environmentalHazards[randomIndex];
