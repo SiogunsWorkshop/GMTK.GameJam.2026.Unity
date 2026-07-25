@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(UniversalBouncer))]
-public class DetectBouncerInFrontComponent : MonoBehaviour
+public class InterruptEnemyInFrontComponent : MonoBehaviour
 {
     [field: SerializeField] public UnityEvent<UniversalBouncer> OnBouncerDetected { get; private set; } = new();
 
     [SerializeField] private UniversalBouncer _bouncer;
     [SerializeField] private float _detectionDistance = 2f;
     [SerializeField] private LayerMask _detectionLayerMask;
+    [SerializeField] private float _disableDuration = 5f;
 
     private void Reset()
     {
@@ -28,9 +29,17 @@ public class DetectBouncerInFrontComponent : MonoBehaviour
             if (!hit.collider.TryGetComponent(out UniversalBouncer bouncer))
                 continue;
 
-            Debug.Log("Detected object in front: " + bouncer.name);
             OnBouncerDetected.Invoke(bouncer);
+            TryInterruptBouncer(bouncer);
             return;
         }
+    }
+
+    private void TryInterruptBouncer(UniversalBouncer bouncer)
+    {
+        if (!bouncer.TryGetComponent(out EnemyMovement enemyMovement))
+            return;
+
+        enemyMovement.DisableForSeconds(_disableDuration);
     }
 }

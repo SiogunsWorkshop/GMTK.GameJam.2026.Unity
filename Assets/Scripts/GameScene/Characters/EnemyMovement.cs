@@ -20,6 +20,9 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector2 _movementDirection = Vector2.zero;
 
+    private bool IsDisabled => Time.time < _disabledUntilTime;
+    private float _disabledUntilTime;
+
     private void Start()
     {
         _bouncer.OnBounced.AddListener(OnBounced);
@@ -40,6 +43,10 @@ public class EnemyMovement : MonoBehaviour
         _bouncer = GetComponent<UniversalBouncer>();
     }
 
+    public void DisableForSeconds(float seconds)
+    {
+        _disabledUntilTime = Time.time + seconds;
+    }
 
     private Vector2 GetRandomDirection()
     {
@@ -56,12 +63,14 @@ public class EnemyMovement : MonoBehaviour
 
     private async UniTask HandleMovement(CancellationToken token)
     {
-        while(token.IsCancellationRequested == false)
+        while (token.IsCancellationRequested == false)
         {
             Debug.DrawRay((Vector2)gameObject.transform.position + ((Vector2)transform.right * 0.1f), _movementDirection, UnityEngine.Color.green);
-            if(_bouncer.Rigidbody.linearVelocity.magnitude < _maxMovementVelocity)
+
+            if (_bouncer.Rigidbody.linearVelocity.magnitude < _maxMovementVelocity && !IsDisabled)
                 _bouncer.Rigidbody.AddForce(_movementDirection * _movementForce, ForceMode2D.Force);
-            await UniTask.Yield(PlayerLoopTiming.Update);
+
+            await UniTask.Yield(PlayerLoopTiming.FixedUpdate);
         }
     }
 }

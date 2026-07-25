@@ -354,4 +354,5 @@ MonoBehaviour:
   _detectionDistance: 4
   _detectionLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 951
+  _disableDuration: 5

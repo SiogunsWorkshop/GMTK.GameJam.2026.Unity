@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5262187630696822769, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
+      propertyPath: _movementForce
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8126533246131002740, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
       propertyPath: m_Name
       value: Jouster
