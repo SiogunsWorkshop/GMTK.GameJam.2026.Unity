@@ -5,9 +5,12 @@ using Zenject;
 
 public class GameSceneManager : MonoBehaviour
 {
+    [field: SerializeField] public UnityEvent OnDepotDelivery { get; private set; } = new();
     [field: SerializeField] public UnityEvent OnPlayerDeath { get; private set; } = new();
 
     [SerializeField] private HealthComponent _playerHealthComponent;
+
+    private int _score;
 
     [Inject] private readonly LoadingWindow _loadingWindow;
     [Inject] private readonly ProjectManager _projectManager;
@@ -28,6 +31,12 @@ public class GameSceneManager : MonoBehaviour
         _playerHealthComponent.OnDeath.RemoveListener(HandlePlayerDeath);
     }
 
+    public void HandleDepotDelivery()
+    {
+        _score += 1;
+        OnDepotDelivery.Invoke();
+    }
+
     private void HandlePlayerDeath()
     {
         HandlePlayerDeathAsync().Forget();
@@ -38,9 +47,8 @@ public class GameSceneManager : MonoBehaviour
         await UniTask.Yield(); // This is to suppress the warning about async void methods
 
         var time = Time.timeSinceLevelLoad;
-        var score = 0; // TODO: Get score from score manager
 
-        _playthroughSnapshotService.SaveSnapshot((score, time));
+        _playthroughSnapshotService.SaveSnapshot((_score, time));
         _projectManager.LoadScene(ProjectManager.SceneName.SummaryScene);
     }
 }
