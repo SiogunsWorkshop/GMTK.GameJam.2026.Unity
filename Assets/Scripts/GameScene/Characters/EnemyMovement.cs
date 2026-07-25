@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
     public void DisableForSeconds(float seconds)
     {
         _disabledUntilTime = Time.time + seconds;
+        OnDisabled.Invoke(seconds);
     }
 
     private Vector2 GetRandomDirection()
