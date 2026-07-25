@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UniversalBouncer
   _rigidBody: {fileID: 7273637984486868386}
   _collider: {fileID: 5404245714344389399}
+  _team: 1
 --- !u!114 &6651325883497676075
 MonoBehaviour:
   m_ObjectHideFlags: 0
