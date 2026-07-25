@@ -6,11 +6,7 @@ using Zenject;
 
 public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
 {
-    [SerializeField] private float _dashOnsetDuration = 1f;
-    [SerializeField] private Dash _dash;
-    private bool CanDash => Time.time > _lastDashTime + _dashOnsetDuration;
-
-    private float _lastDashTime;
+    [SerializeField] private DelayedAbility _dash;
 
     [Inject] private readonly InputMap _inputMap;
 
@@ -39,9 +35,6 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
     public void OnDash(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        if (!CanDash) return;
-
-        _lastDashTime = Time.time;
-        _dash.DashAlongCurrentVelocity();
+        _dash.TriggerAbility();
     }
 }
