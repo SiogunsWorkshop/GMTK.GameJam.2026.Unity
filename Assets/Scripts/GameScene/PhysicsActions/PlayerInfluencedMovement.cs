@@ -19,12 +19,16 @@ public class PlayerInfluencedMovement : MonoBehaviour
     {
         _playerMovement.OnMoveInputPerformed.AddListener(OnMoveInputPerformed);
         _playerMovement.OnMoveInputCanceled.AddListener(OnMoveInputCanceled);
+
+        _movementInput = Vector2.zero;
     }
 
     private void OnDisable()
     {
         _playerMovement.OnMoveInputPerformed.RemoveListener(OnMoveInputPerformed);
         _playerMovement.OnMoveInputCanceled.RemoveListener(OnMoveInputCanceled);
+
+        _movementInput = Vector2.zero;
     }
 
     private void FixedUpdate()

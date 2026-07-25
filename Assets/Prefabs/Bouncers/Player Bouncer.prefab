@@ -211,6 +211,18 @@ MonoBehaviour:
       m_Calls: []
   <OnDeath>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6651325883497676075}
+        m_TargetAssemblyTypeName: PlayerInfluencedMovement, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <MaxHealth>k__BackingField: 3
-  _hasDied: 0
+  <PostDamageInvincibilityPeriod>k__BackingField: 1
