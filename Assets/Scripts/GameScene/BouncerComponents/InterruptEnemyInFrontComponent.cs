@@ -19,9 +19,12 @@ public class InterruptEnemyInFrontComponent : MonoBehaviour
     public void DetectBouncerInFront()
     {
         Vector2 direction = _bouncer.Rigidbody.linearVelocity.normalized;
+        if(_bouncer.Rigidbody.linearVelocity.magnitude == 0)
+            direction = Vector2.up;
         Vector2 origin = (Vector2)transform.position + direction * 0.1f;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, _detectionDistance, _detectionLayerMask);
+        Debug.DrawRay(origin, direction, Color.magenta, 2f);
         foreach (var hit in hits)
         {
             if (hit.collider == null || hit.collider.gameObject == gameObject)
