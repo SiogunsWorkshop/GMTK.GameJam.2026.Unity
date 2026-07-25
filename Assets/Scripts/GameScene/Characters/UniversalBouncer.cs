@@ -28,6 +28,7 @@ public class UniversalBouncer : MonoBehaviour
         _rigidBody.sharedMaterial = Resources.Load<PhysicsMaterial2D>("FunnyBouncy");
         _rigidBody.linearDamping = 1;
         _rigidBody.angularDamping = 0;
+        _rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
     private void Start()
