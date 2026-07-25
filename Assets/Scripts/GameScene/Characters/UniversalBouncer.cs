@@ -50,9 +50,7 @@ public class UniversalBouncer : MonoBehaviour
     {
         while (token.IsCancellationRequested == false)
         {
-            //if(_rigidBody.linearVelocity.magnitude < 5)
-            //    _rigidBody.AddForce(_direction * _force, ForceMode2D.Force);
-            Debug.DrawRay(gameObject.transform.position, _rigidBody.linearVelocity, UnityEngine.Color.red);
+            Debug.DrawRay(gameObject.transform.position, _rigidBody.linearVelocity.normalized * FloatTools.RemapClamped(_rigidBody.linearVelocity.magnitude, 0f, 10f, 0.3f, 1.5f), UnityEngine.Color.red);
             await UniTask.Yield(PlayerLoopTiming.Update);
         }
     }

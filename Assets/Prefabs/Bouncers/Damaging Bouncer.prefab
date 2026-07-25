@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6531219490084944055, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_LinearDamping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
       propertyPath: m_Name
       value: Damaging Bouncer
@@ -68,13 +72,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7193814893136833882, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1484862539879359641}
+    - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1889635419993122115}
   m_SourcePrefab: {fileID: 100100000, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
 --- !u!114 &2948008674671782947 stripped
 MonoBehaviour:
@@ -107,3 +115,18 @@ MonoBehaviour:
   _bouncer: {fileID: 2948008674671782947}
   _damageAmount: 1
   _allowFriendlyFire: 0
+--- !u!114 &1889635419993122115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126533246131002740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2dec1c389a72d49aad61b47fdef510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  _bouncer: {fileID: 2948008674671782947}
+  _force: 12
+  _startForce: 5
