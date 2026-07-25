@@ -23,14 +23,14 @@ public class Arrow : DamageComponent
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == 25)
+            Destroy(gameObject);
+
         if (!collision.gameObject.TryGetComponent(out HealthComponent otherHealth))
             return;
         var otherBouncer = otherHealth.GetComponent<UniversalBouncer>();
         if (!CanBeDamaged(_team, otherBouncer))
             return;
-
-        if (collision.gameObject.layer == 25)
-            Destroy(gameObject);
 
         otherHealth.TakeDamage(_damageAmount);
         Destroy(gameObject);
