@@ -10,5 +10,6 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<PlayerAbilityController>().FromComponentInHierarchy().AsSingle();
         Container.Bind<DelayedAbilityCountdownDisplay>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ArenaController>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<RapidTextController>().FromComponentInHierarchy().AsSingle();
     }
 }
