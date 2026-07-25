@@ -29,6 +29,7 @@ public class HealthComponent : MonoBehaviour
     {
         if (_hasDied) return;
         if (damage <= 0) return;
+        if (IsInvincible) return;
 
         SetHealth(CurrentHealth - damage);
         _lastDamageTime = Time.time;
