@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Zenject;
 
 [RequireComponent(typeof(UniversalBouncer))]
-public class PlayerControlledMovement : MonoBehaviour
+public class PlayerInfluencedMovement : MonoBehaviour
 {
     [SerializeField] private UniversalBouncer _bouncer;
     [SerializeField] private float _force = 1;
