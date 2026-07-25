@@ -7,6 +7,9 @@ using UnityEngine;
 public class ArcherBow : MonoBehaviour
 {
     [SerializeField] private EnemyMovement _archer;
+    [SerializeField] private GameObject _spawnPivot;
+    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Arrow _arrowPrefab;
     [SerializeField] private float _angleChangeOnBounce = 25;
     [SerializeField] private bool _clockwise = true;
     [SerializeField] private float _shootCooldown = 2f;
@@ -33,6 +36,7 @@ public class ArcherBow : MonoBehaviour
         gameObject.transform.rotation = Quaternion.FromToRotation(Vector2.up, _archer.MovementDirection);
         _bowAngle = gameObject.transform.rotation.eulerAngles.z;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, _bowAngle);
+        _spawnPivot.transform.rotation = Quaternion.Euler(0, 0, _bowAngle);
         await UniTask.Delay(TimeSpan.FromSeconds(1), delayType: DelayType.DeltaTime);
 
         while (token.IsCancellationRequested == false)
@@ -44,15 +48,23 @@ public class ArcherBow : MonoBehaviour
     private void OnBounced(UniversalBouncer bouncer, Collision2D collision)
     {
         Rotate();
+        _spawnPivot.transform.rotation = Quaternion.Euler(0, 0, _bowAngle);
     }
     private void Rotate()
     {
-        _bowAngle += _clockwise == true ? -_angleChangeOnBounce : _angleChangeOnBounce;
+        _bowAngle += _clockwise == false ? _angleChangeOnBounce : -_angleChangeOnBounce;
         _bowAngle = _bowAngle % 360;
         gameObject.transform.rotation = Quaternion.Euler(0,0,_bowAngle);
     }
     private void Shoot()
     {
+        var arrow = Instantiate(_arrowPrefab, _spawnPoint.position, Quaternion.identity);
 
+        float radians = _bowAngle * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(-Mathf.Sin(radians), Mathf.Cos(radians));
+        Debug.Log(_bowAngle);
+        Debug.Log(direction);
+
+        arrow.Spawn(_archer.Bouncer.Team, direction);
     }
 }

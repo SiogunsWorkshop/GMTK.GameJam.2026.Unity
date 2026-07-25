@@ -232,6 +232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherBow
   _archer: {fileID: 5864689997468216086}
+  _spawnPivot: {fileID: 5505547994705670761}
+  _spawnPoint: {fileID: 347036705202115756}
+  _arrowPrefab: {fileID: 3339126519021328839, guid: 4ed7953066b44fe41a751560871f38b0, type: 3}
   _angleChangeOnBounce: 25
   _clockwise: 1
   _shootCooldown: 2
@@ -246,7 +249,7 @@ GameObject:
   - component: {fileID: 8915765182488269458}
   - component: {fileID: 8552748699387938709}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,6 +879,69 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &5505547994705670761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2292343294667561106}
+  m_Layer: 0
+  m_Name: SpawnPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2292343294667561106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5505547994705670761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 347036705202115756}
+  m_Father: {fileID: 2265596107027818325}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8931950740218179883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347036705202115756}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &347036705202115756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931950740218179883}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2292343294667561106}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1757701003077115111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -942,6 +1008,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 510481362665667506, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6658529532641943724}
+    - targetCorrespondingSourceObject: {fileID: 510481362665667506, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2292343294667561106}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
 --- !u!4 &2265596107027818325 stripped
