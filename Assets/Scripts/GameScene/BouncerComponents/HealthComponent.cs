@@ -14,11 +14,11 @@ public class HealthComponent : MonoBehaviour
     [field: ShowInInspector, ReadOnly] public int CurrentHealth { get; private set; }
     [field: SerializeField] public float PostDamageInvincibilityPeriod { get; private set; } = 1f;
 
-    public bool IsInvincible => Time.time - _lastDamageTime < PostDamageInvincibilityPeriod;
+    public bool IsInvincible => Time.time < _invincibleUntilTime;
     public bool IsDead => CurrentHealth <= 0;
 
     private bool _hasDied;
-    private float _lastDamageTime;
+    private float _invincibleUntilTime;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class HealthComponent : MonoBehaviour
         if (IsInvincible) return;
 
         SetHealth(CurrentHealth - damage);
-        _lastDamageTime = Time.time;
+        SetInvincibilityPeriod(PostDamageInvincibilityPeriod);
         OnDamaged.Invoke();
 
         TryDie();
@@ -45,6 +45,11 @@ public class HealthComponent : MonoBehaviour
 
         SetHealth(CurrentHealth + healAmount);
         OnHealed.Invoke();
+    }
+
+    public void SetInvincibilityPeriod(float duration)
+    {
+        _invincibleUntilTime = Time.time + duration;
     }
 
     private void SetHealth(int health)

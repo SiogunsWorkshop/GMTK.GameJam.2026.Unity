@@ -13,7 +13,10 @@ public class PlayerInfluencedMovement : MonoBehaviour
 
     [Inject] private readonly PlayerMovementController _playerMovement;
 
+    private bool IsDisabled => Time.time < _disabledUntilTime;
+
     private Vector2 _movementInput;
+    private float _disabledUntilTime;
 
     private void OnEnable()
     {
@@ -33,7 +36,7 @@ public class PlayerInfluencedMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_movementInput == Vector2.zero)
+        if (_movementInput == Vector2.zero || IsDisabled)
             return;
 
         _bouncer.Rigidbody.AddForce(_movementInput * _force, ForceMode2D.Force);
@@ -43,6 +46,12 @@ public class PlayerInfluencedMovement : MonoBehaviour
     {
         _bouncer = GetComponent<UniversalBouncer>();
     }
+
+    public void DisableForSeconds(float seconds)
+    {
+        _disabledUntilTime = Time.time + seconds;
+    }
+
 
     private void OnMoveInputCanceled(Vector2 arg0)
     {

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class UniversalBouncer : MonoBehaviour
 {
-    public UnityEvent<UniversalBouncer, Collision2D> OnBounced { get; private set; } = new();
+    [field: SerializeField] public UnityEvent<UniversalBouncer, Collision2D> OnBounced { get; private set; } = new();
 
     public Rigidbody2D Rigidbody => _rigidBody;
     public Collider2D Collider => _collider;
