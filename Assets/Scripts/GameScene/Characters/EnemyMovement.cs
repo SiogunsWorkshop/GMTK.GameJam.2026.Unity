@@ -3,10 +3,13 @@ using DG.Tweening.Core.Easing;
 using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(UniversalBouncer))]
 public class EnemyMovement : MonoBehaviour
 {
+    public UnityEvent<float> OnDisabled { get; private set; } = new();
+
     public Vector2 MovementDirection => _movementDirection;
     public UniversalBouncer Bouncer => _bouncer;
 
