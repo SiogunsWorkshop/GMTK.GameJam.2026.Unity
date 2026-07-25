@@ -8,8 +8,6 @@ public class GameSceneManager : MonoBehaviour
     [field: SerializeField] public UnityEvent OnDepotDelivery { get; private set; } = new();
     [field: SerializeField] public UnityEvent OnPlayerDeath { get; private set; } = new();
 
-    public int ActiveCargoCount { get; set; }
-
     [SerializeField] private HealthComponent _playerHealthComponent;
 
     private int _score;
@@ -38,8 +36,9 @@ public class GameSceneManager : MonoBehaviour
     {
         _score += 1;
         OnDepotDelivery.Invoke();
+        _arenaController.CargoCount--;
 
-        if (ActiveCargoCount == 1)
+        if (_arenaController.CargoCount <= 0)
         {
             _arenaController.RerollEnvironmentalHazards();
         }
