@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6531219490084944055, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_LinearDamping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
       propertyPath: m_Name
       value: Kamikaze Bouncer

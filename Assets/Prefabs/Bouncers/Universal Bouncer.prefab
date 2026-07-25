@@ -108,7 +108,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 1
   m_AngularDamping: 0
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 213b876b4b486f647a58e809a716218c, type: 2}
@@ -170,8 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8f2f0aa26f52545951fd8f126aabc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UniversalBouncer
+  <OnBounced>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   _rigidBody: {fileID: 6531219490084944055}
   _collider: {fileID: 6052561480488384464}
+  _team: 0
 --- !u!114 &7193814893136833882
 MonoBehaviour:
   m_ObjectHideFlags: 0

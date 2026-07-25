@@ -82,7 +82,7 @@ PrefabInstance:
       addedObject: {fileID: -1484862539879359641}
     - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1889635419993122115}
+      addedObject: {fileID: 5262187630696822769}
   m_SourcePrefab: {fileID: 100100000, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
 --- !u!114 &2948008674671782947 stripped
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   _bouncer: {fileID: 2948008674671782947}
   _damageAmount: 1
   _allowFriendlyFire: 0
---- !u!114 &1889635419993122115
+--- !u!114 &5262187630696822769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,5 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   _bouncer: {fileID: 2948008674671782947}
-  _force: 12
-  _startForce: 5
+  _maxMovementVelocity: 8
+  _movementForce: 0.75
+  _startForce: 0

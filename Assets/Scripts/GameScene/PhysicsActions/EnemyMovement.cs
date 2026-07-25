@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private UniversalBouncer _bouncer;
 
-    [SerializeField] private float _maxMovementVelocity;
+    [SerializeField] private float _maxMovementVelocity = 6;
     [SerializeField] private float _movementForce = 0.5f;
     [SerializeField] private float _startForce = 0;
 
