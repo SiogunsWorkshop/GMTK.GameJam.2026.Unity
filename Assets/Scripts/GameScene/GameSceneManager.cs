@@ -8,6 +8,8 @@ public class GameSceneManager : MonoBehaviour
     [field: SerializeField] public UnityEvent OnDepotDelivery { get; private set; } = new();
     [field: SerializeField] public UnityEvent OnPlayerDeath { get; private set; } = new();
 
+    public int ActiveCargoCount { get; set; }
+
     [SerializeField] private HealthComponent _playerHealthComponent;
 
     private int _score;
@@ -15,6 +17,7 @@ public class GameSceneManager : MonoBehaviour
     [Inject] private readonly LoadingWindow _loadingWindow;
     [Inject] private readonly ProjectManager _projectManager;
     [Inject] private readonly PlaythroughSummarySnapshotService _playthroughSnapshotService;
+    [Inject] private readonly ArenaController _arenaController;
 
     private void Awake()
     {
@@ -35,6 +38,11 @@ public class GameSceneManager : MonoBehaviour
     {
         _score += 1;
         OnDepotDelivery.Invoke();
+
+        if (ActiveCargoCount == 1)
+        {
+            _arenaController.RerollEnvironmentalHazards();
+        }
     }
 
     private void HandlePlayerDeath()

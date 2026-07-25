@@ -60,5 +60,25 @@ PrefabInstance:
     - {fileID: 7193814893136833882, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7022761209168880284}
   m_SourcePrefab: {fileID: 100100000, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+--- !u!1 &9061556712095292122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+  m_PrefabInstance: {fileID: 2476655153093293387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7022761209168880284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061556712095292122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54852889286781947afae262a0563bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CargoComponent
