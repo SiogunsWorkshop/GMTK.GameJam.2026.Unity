@@ -234,6 +234,7 @@ MonoBehaviour:
   _archer: {fileID: 5864689997468216086}
   _angleChangeOnBounce: 25
   _clockwise: 1
+  _shootCooldown: 2
 --- !u!1 &1449921769242632841
 GameObject:
   m_ObjectHideFlags: 0
