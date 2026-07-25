@@ -5,16 +5,28 @@ using UnityEngine;
 public class ApplyDamageOnContactComponent : DamageComponent
 {
     [SerializeField] private UniversalBouncer _bouncer;
+    [SerializeField] private EnemyMovement _enemy;
     
+    private bool _disabled = false;
 
     private void OnEnable()
     {
         _bouncer.OnBounced.AddListener(HandleBounced);
+        if( _enemy != null)
+        {
+            _enemy.OnDisabled.AddListener(TurnOff);
+            _enemy.OnDisableEnd.AddListener(TurnOn);
+        }
     }
 
     private void OnDisable()
     {
         _bouncer.OnBounced.RemoveListener(HandleBounced);
+        if (_enemy != null)
+        {
+            _enemy.OnDisabled.RemoveListener(TurnOff);
+            _enemy.OnDisableEnd.RemoveListener(TurnOn);
+        }
     }
 
     private void Reset()
@@ -24,6 +36,8 @@ public class ApplyDamageOnContactComponent : DamageComponent
 
     private void HandleBounced(UniversalBouncer self, Collision2D other)
     {
+        if (_disabled)
+            return;
         if (!other.gameObject.TryGetComponent(out HealthComponent otherHealth))
             return;
 
@@ -33,5 +47,13 @@ public class ApplyDamageOnContactComponent : DamageComponent
             return;
 
         otherHealth.TakeDamage(_damageAmount);
+    }
+    private void TurnOff(float notUsed)
+    {
+        _disabled = true;
+    }
+    private void TurnOn()
+    {
+        _disabled = false;
     }
 }

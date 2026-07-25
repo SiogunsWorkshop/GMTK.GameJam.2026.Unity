@@ -112,9 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c929ecd6a58a414789d5cad59a5f6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ApplyDamageOnContactComponent
-  _bouncer: {fileID: 2948008674671782947}
-  _damageAmount: 1
   _allowFriendlyFire: 0
+  _damageAmount: 1
+  _bouncer: {fileID: 2948008674671782947}
+  _enemy: {fileID: 5262187630696822769}
 --- !u!114 &5262187630696822769
 MonoBehaviour:
   m_ObjectHideFlags: 0

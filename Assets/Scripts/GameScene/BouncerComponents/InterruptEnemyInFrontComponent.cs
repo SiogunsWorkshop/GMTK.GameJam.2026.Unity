@@ -19,7 +19,7 @@ public class InterruptEnemyInFrontComponent : MonoBehaviour
     public void DetectBouncerInFront()
     {
         Vector2 direction = _bouncer.Rigidbody.linearVelocity.normalized;
-        if(_bouncer.Rigidbody.linearVelocity.magnitude == 0)
+        if(_bouncer.Rigidbody.linearVelocity.magnitude <= 0.005f)
             direction = Vector2.up;
         Vector2 origin = (Vector2)transform.position + direction * 0.1f;
 
