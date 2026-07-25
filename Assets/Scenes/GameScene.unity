@@ -450,7 +450,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _text: {fileID: 1957512527}
-  _displayDuration: 0.45
+  _displayDuration: 0.35
 --- !u!1 &215067554
 GameObject:
   m_ObjectHideFlags: 0
