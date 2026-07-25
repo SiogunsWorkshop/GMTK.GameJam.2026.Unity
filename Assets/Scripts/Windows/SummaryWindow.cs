@@ -17,6 +17,13 @@ public class SummaryWindow : MonoBehaviour
     [SerializeField] private Button _quitButton;
 
     [Inject] private readonly ProjectManager _projectManager;
+    [Inject] private readonly PlaythroughSummarySnapshotService _playthroughSummarySnapshotService;
+
+    private void Awake()
+    {
+        UpdateTime();
+        UpdateScore();
+    }
 
     private void OnEnable()
     {
@@ -35,6 +42,18 @@ public class SummaryWindow : MonoBehaviour
     private void Reset()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    private void UpdateTime()
+    {
+        var snapshot = _playthroughSummarySnapshotService.ReadSnapshot();
+        _timeText.text = $"{snapshot.Time:0.00}";
+    }
+
+    private void UpdateScore()
+    {
+        var snapshot = _playthroughSummarySnapshotService.ReadSnapshot();
+        _scoreText.text = $"{snapshot.Score}";
     }
 
     private void OnQuitButtonClicked()
