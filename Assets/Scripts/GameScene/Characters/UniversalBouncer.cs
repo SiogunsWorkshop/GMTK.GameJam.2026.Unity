@@ -6,12 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class UniversalBouncer : MonoBehaviour
 {
+    public Rigidbody2D Rigidbody => _rigidBody;
+    public Collider2D Collider => _collider;
+
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private Collider2D _collider;
-    [SerializeField] private float _force = 1;
 
     private CancellationTokenSource _handleBouncer;
-    private Vector2 _direction;
 
     private void Reset()
     {
@@ -26,9 +27,6 @@ public class UniversalBouncer : MonoBehaviour
 
     private void Start()
     {
-        _direction = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-        _rigidBody.AddForce(_direction * _force, ForceMode2D.Impulse);
-
         UniTaskTools.RenewToken(ref _handleBouncer);
         HandleBouncer(_handleBouncer.Token).Forget();
     }
@@ -43,15 +41,8 @@ public class UniversalBouncer : MonoBehaviour
         {
             //if(_rigidBody.linearVelocity.magnitude < 5)
             //    _rigidBody.AddForce(_direction * _force, ForceMode2D.Force);
-            Debug.DrawRay(gameObject.transform.position, _direction, UnityEngine.Color.green);
             Debug.DrawRay(gameObject.transform.position, _rigidBody.linearVelocity, UnityEngine.Color.red);
             await UniTask.Yield(PlayerLoopTiming.Update);
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Vector2 incoming = -collision.relativeVelocity;
-        Vector2 normal = collision.contacts[0].normal;
-        _direction = Vector2.Reflect(incoming, normal).normalized;
     }
 }

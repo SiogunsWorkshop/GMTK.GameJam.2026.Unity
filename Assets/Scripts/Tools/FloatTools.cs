@@ -12,4 +12,10 @@ public static class FloatTools
         float t = Mathf.InverseLerp(inMin, inMax, value);
         return Mathf.Lerp(outMin, outMax, t);
     }
+
+    public static Vector2 AngleToDirection(float angleInDegrees)
+    {
+        float angleInRadians = angleInDegrees * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians)).normalized;
+    }
 }
