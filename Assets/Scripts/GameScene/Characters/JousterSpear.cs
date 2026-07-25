@@ -14,6 +14,7 @@ public class JousterSpear : DamageComponent
     private void Start()
     {
         UniTaskTools.RenewToken(ref _handleSpear);
+        HandleSpear(_handleSpear.Token).Forget();
     }
     private void OnDestroy()
     {
@@ -24,9 +25,9 @@ public class JousterSpear : DamageComponent
         _collider = GetComponent<CapsuleCollider2D>();
         _collider.isTrigger = true;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!other.gameObject.TryGetComponent(out HealthComponent otherHealth))
+        if (!collision.gameObject.TryGetComponent(out HealthComponent otherHealth))
             return;
         var otherBouncer = otherHealth.GetComponent<UniversalBouncer>();
         if (!CanBeDamaged(_jouster.Bouncer, otherBouncer))
