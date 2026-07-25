@@ -1157,7 +1157,7 @@ namespace Input
             ""id"": ""39531538-ad1f-45f6-bc5d-ddadfae827d0"",
             ""actions"": [
                 {
-                    ""name"": ""Ability1"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""72eb2035-a358-4c67-a87f-5492410ffedc"",
                     ""expectedControlType"": """",
@@ -1166,7 +1166,7 @@ namespace Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Ability2"",
+                    ""name"": ""Explode"",
                     ""type"": ""Button"",
                     ""id"": ""013570f0-c842-4743-9dcc-d5c5d95c8a8e"",
                     ""expectedControlType"": """",
@@ -1192,7 +1192,7 @@ namespace Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability1"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1203,7 +1203,7 @@ namespace Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability2"",
+                    ""action"": ""Explode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1312,8 +1312,8 @@ namespace Input
             m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
             // Abilities
             m_Abilities = asset.FindActionMap("Abilities", throwIfNotFound: true);
-            m_Abilities_Ability1 = m_Abilities.FindAction("Ability1", throwIfNotFound: true);
-            m_Abilities_Ability2 = m_Abilities.FindAction("Ability2", throwIfNotFound: true);
+            m_Abilities_Attack = m_Abilities.FindAction("Attack", throwIfNotFound: true);
+            m_Abilities_Explode = m_Abilities.FindAction("Explode", throwIfNotFound: true);
             m_Abilities_Dash = m_Abilities.FindAction("Dash", throwIfNotFound: true);
         }
 
@@ -1873,8 +1873,8 @@ namespace Input
         // Abilities
         private readonly InputActionMap m_Abilities;
         private List<IAbilitiesActions> m_AbilitiesActionsCallbackInterfaces = new List<IAbilitiesActions>();
-        private readonly InputAction m_Abilities_Ability1;
-        private readonly InputAction m_Abilities_Ability2;
+        private readonly InputAction m_Abilities_Attack;
+        private readonly InputAction m_Abilities_Explode;
         private readonly InputAction m_Abilities_Dash;
         /// <summary>
         /// Provides access to input actions defined in input action map "Abilities".
@@ -1888,13 +1888,13 @@ namespace Input
             /// </summary>
             public AbilitiesActions(@InputMap wrapper) { m_Wrapper = wrapper; }
             /// <summary>
-            /// Provides access to the underlying input action "Abilities/Ability1".
+            /// Provides access to the underlying input action "Abilities/Attack".
             /// </summary>
-            public InputAction @Ability1 => m_Wrapper.m_Abilities_Ability1;
+            public InputAction @Attack => m_Wrapper.m_Abilities_Attack;
             /// <summary>
-            /// Provides access to the underlying input action "Abilities/Ability2".
+            /// Provides access to the underlying input action "Abilities/Explode".
             /// </summary>
-            public InputAction @Ability2 => m_Wrapper.m_Abilities_Ability2;
+            public InputAction @Explode => m_Wrapper.m_Abilities_Explode;
             /// <summary>
             /// Provides access to the underlying input action "Abilities/Dash".
             /// </summary>
@@ -1925,12 +1925,12 @@ namespace Input
             {
                 if (instance == null || m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_AbilitiesActionsCallbackInterfaces.Add(instance);
-                @Ability1.started += instance.OnAbility1;
-                @Ability1.performed += instance.OnAbility1;
-                @Ability1.canceled += instance.OnAbility1;
-                @Ability2.started += instance.OnAbility2;
-                @Ability2.performed += instance.OnAbility2;
-                @Ability2.canceled += instance.OnAbility2;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @Explode.started += instance.OnExplode;
+                @Explode.performed += instance.OnExplode;
+                @Explode.canceled += instance.OnExplode;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
@@ -1945,12 +1945,12 @@ namespace Input
             /// <seealso cref="AbilitiesActions" />
             private void UnregisterCallbacks(IAbilitiesActions instance)
             {
-                @Ability1.started -= instance.OnAbility1;
-                @Ability1.performed -= instance.OnAbility1;
-                @Ability1.canceled -= instance.OnAbility1;
-                @Ability2.started -= instance.OnAbility2;
-                @Ability2.performed -= instance.OnAbility2;
-                @Ability2.canceled -= instance.OnAbility2;
+                @Attack.started -= instance.OnAttack;
+                @Attack.performed -= instance.OnAttack;
+                @Attack.canceled -= instance.OnAttack;
+                @Explode.started -= instance.OnExplode;
+                @Explode.performed -= instance.OnExplode;
+                @Explode.canceled -= instance.OnExplode;
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
@@ -2224,19 +2224,19 @@ namespace Input
         public interface IAbilitiesActions
         {
             /// <summary>
-            /// Method invoked when associated input action "Ability1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnAbility1(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Ability2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Explode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnAbility2(InputAction.CallbackContext context);
+            void OnExplode(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
