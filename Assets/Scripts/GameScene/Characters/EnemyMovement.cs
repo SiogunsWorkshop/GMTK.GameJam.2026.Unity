@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class EnemyMovement : MonoBehaviour
 {
     public UnityEvent<float> OnDisabled { get; private set; } = new();
+    public UnityEvent OnDisableEnd { get; private set; } = new();
 
     public Vector2 MovementDirection => _movementDirection;
     public UniversalBouncer Bouncer => _bouncer;
@@ -20,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _startForce = 0;
 
     private CancellationTokenSource _handleEnemyMovement;
+    private CancellationTokenSource _checkIfEnabled;
 
     private Vector2 _movementDirection = Vector2.zero;
 
@@ -39,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
     {
         _bouncer.OnBounced.RemoveListener(OnBounced);
         UniTaskTools.KillToken(ref _handleEnemyMovement);
+        UniTaskTools.KillToken(ref _checkIfEnabled);
     }
 
     private void Reset()
@@ -50,6 +53,8 @@ public class EnemyMovement : MonoBehaviour
     {
         _disabledUntilTime = Time.time + seconds;
         OnDisabled.Invoke(seconds);
+        UniTaskTools.RenewToken(ref _checkIfEnabled);
+        CheckIfEnabled(_checkIfEnabled.Token).Forget();
     }
 
     private Vector2 GetRandomDirection()
@@ -75,6 +80,18 @@ public class EnemyMovement : MonoBehaviour
                 _bouncer.Rigidbody.AddForce(_movementDirection * _movementForce, ForceMode2D.Force);
 
             await UniTask.Yield(PlayerLoopTiming.FixedUpdate);
+        }
+    }
+    private async UniTask CheckIfEnabled(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            if (IsDisabled == false)
+            {
+                OnDisableEnd.Invoke();
+                break;
+            }
+            await UniTask.Yield(PlayerLoopTiming.Update);
         }
     }
 }
