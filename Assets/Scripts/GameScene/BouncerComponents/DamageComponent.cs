@@ -10,4 +10,9 @@ public class DamageComponent : MonoBehaviour
         bool sameTeam = self.Team == other.Team;
         return !sameTeam || _allowFriendlyFire;
     }
+    protected bool CanBeDamaged(Team team, UniversalBouncer other)
+    {
+        bool sameTeam = team == other.Team;
+        return !sameTeam || _allowFriendlyFire;
+    }
 }
