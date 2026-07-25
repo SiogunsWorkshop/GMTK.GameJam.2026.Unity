@@ -8,6 +8,7 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
 {
     [SerializeField] private DelayedAbility _dash;
     [SerializeField] private DelayedAbility _explode;
+    [SerializeField] private DelayedAbility _attack;
 
     private bool _isUsingAbility;
 
@@ -29,6 +30,11 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
         _explode.OnAbilityTriggered.AddListener(_delayedAbilityCountdownDisplay.SetEmptyFill);
         _explode.OnAbilityTriggered.AddListener(ReleaseIsUsingAbilityFlag);
 
+        _attack.OnAbilityDelayUpdated.AddListener(_delayedAbilityCountdownDisplay.UpdateFill);
+        _attack.OnAbilityDelayStarted.AddListener(_delayedAbilityCountdownDisplay.SetFullFill_Wrapper);
+        _attack.OnAbilityTriggered.AddListener(_delayedAbilityCountdownDisplay.SetEmptyFill);
+        _attack.OnAbilityTriggered.AddListener(ReleaseIsUsingAbilityFlag);
+
     }
 
     private void OnDisable()
@@ -45,6 +51,11 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
         _explode.OnAbilityDelayStarted.RemoveListener(_delayedAbilityCountdownDisplay.SetFullFill_Wrapper);
         _explode.OnAbilityTriggered.RemoveListener(_delayedAbilityCountdownDisplay.SetEmptyFill);
         _explode.OnAbilityTriggered.RemoveListener(ReleaseIsUsingAbilityFlag);
+
+        _attack.OnAbilityDelayUpdated.RemoveListener(_delayedAbilityCountdownDisplay.UpdateFill);
+        _attack.OnAbilityDelayStarted.RemoveListener(_delayedAbilityCountdownDisplay.SetFullFill_Wrapper);
+        _attack.OnAbilityTriggered.RemoveListener(_delayedAbilityCountdownDisplay.SetEmptyFill);
+        _attack.OnAbilityTriggered.RemoveListener(ReleaseIsUsingAbilityFlag);
     }
 
     private void ReleaseIsUsingAbilityFlag()
@@ -54,7 +65,10 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (!context.performed || _isUsingAbility) return;
+
+        _isUsingAbility = true;
+        _attack.TriggerAbility();
     }
 
     public void OnExplode(InputAction.CallbackContext context)
