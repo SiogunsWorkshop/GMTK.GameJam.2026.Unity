@@ -1069,7 +1069,7 @@
             "id": "39531538-ad1f-45f6-bc5d-ddadfae827d0",
             "actions": [
                 {
-                    "name": "Ability1",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "72eb2035-a358-4c67-a87f-5492410ffedc",
                     "expectedControlType": "",
@@ -1078,7 +1078,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ability2",
+                    "name": "Explode",
                     "type": "Button",
                     "id": "013570f0-c842-4743-9dcc-d5c5d95c8a8e",
                     "expectedControlType": "",
@@ -1104,7 +1104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability1",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1115,7 +1115,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability2",
+                    "action": "Explode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
