@@ -8,9 +8,11 @@ public class UniversalBouncer : MonoBehaviour
 {
     public Rigidbody2D Rigidbody => _rigidBody;
     public Collider2D Collider => _collider;
+    public Team Team => _team;
 
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private Collider2D _collider;
+    [SerializeField] private Team _team = Team.None;
 
     private CancellationTokenSource _handleBouncer;
 
