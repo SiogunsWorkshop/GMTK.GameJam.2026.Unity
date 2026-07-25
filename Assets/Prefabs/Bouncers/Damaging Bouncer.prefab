@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damaging Bouncer
       objectReference: {fileID: 0}
+    - target: {fileID: 8034563969944485018, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5235849
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034563969944485018, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5235849
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034563969944485018, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

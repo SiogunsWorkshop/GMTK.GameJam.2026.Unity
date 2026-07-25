@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour
     [field: ShowInInspector, ReadOnly] public int CurrentHealth { get; private set; }
 
     public bool IsDead => CurrentHealth <= 0;
-    public bool _hasDied;
+    private bool _hasDied;
 
     private void Awake()
     {
