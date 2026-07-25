@@ -1,4 +1,4 @@
-public class PlaythroughSummarySnapshotService : ISnapshot<object, PlaythroughSummarySnapshot>
+public class PlaythroughSummarySnapshotService : ISnapshot<(int score, float time), PlaythroughSummarySnapshot>
 {
     private PlaythroughSummarySnapshot _snapshot;
 
@@ -7,9 +7,13 @@ public class PlaythroughSummarySnapshotService : ISnapshot<object, PlaythroughSu
         return _snapshot;
     }
 
-    public void SaveSnapshot(object source)
+    public void SaveSnapshot((int score, float time) data)
     {
-        throw new System.NotImplementedException();
+        _snapshot = new PlaythroughSummarySnapshot
+        {
+            Score = data.score,
+            Time = data.time
+        };
     }
 }
 
