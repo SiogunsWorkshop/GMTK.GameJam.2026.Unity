@@ -6,6 +6,9 @@ using Zenject;
 
 public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
 {
+    public UnityEvent OnAbilityStarted { get; private set; } = new();
+    public UnityEvent OnAbilityEnded { get; private set; } = new();
+
     [SerializeField] private DelayedAbility _dash;
     [SerializeField] private DelayedAbility _explode;
     [SerializeField] private DelayedAbility _attack;
@@ -61,6 +64,7 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
     private void ReleaseIsUsingAbilityFlag()
     {
         _isUsingAbility = false;
+        OnAbilityEnded.Invoke();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -68,6 +72,7 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
         if (!context.performed || _isUsingAbility) return;
 
         _isUsingAbility = true;
+        OnAbilityStarted.Invoke();
         _attack.TriggerAbility();
     }
 
@@ -76,6 +81,7 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
         if (!context.performed || _isUsingAbility) return;
 
         _isUsingAbility = true;
+        OnAbilityStarted.Invoke();
         _explode.TriggerAbility();
     }
 
@@ -84,6 +90,7 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
         if (!context.performed || _isUsingAbility) return;
 
         _isUsingAbility = true;
+        OnAbilityStarted.Invoke();
         _dash.TriggerAbility();
     }
 }
