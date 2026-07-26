@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: KamiKaze 1
   m_Shader: {fileID: -6465566751694194690, guid: 209998b9a37259d4cb2bdcafba211128, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -45,10 +45,10 @@ Material:
     - _Offset: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Reverse: 0
+    - _Reverse: 1
     - _SpinSpeed: 4
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.06795335, a: 1}
+    - _Color: {r: 1, g: 0.7062266, b: 0, a: 1}
     - _DarkColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
