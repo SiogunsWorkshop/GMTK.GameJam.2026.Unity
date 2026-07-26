@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,8 @@ public class Explode : MonoBehaviour
     [SerializeField] private float _force = 12;
     [SerializeField] private float _radius = 5;
     [SerializeField] private AnimationCurve _forceFalloff = AnimationCurve.Linear(0, 1, 1, 0);
+
+    [SerializeField] private bool _killSelfOnExplode = false;
 
     public void ExplodeNow()
     {
@@ -33,6 +36,19 @@ public class Explode : MonoBehaviour
             bouncer.Rigidbody.AddForce(_force * forceMultiplier * direction, ForceMode2D.Impulse);
 
             OnAffectedByExplosion.Invoke(bouncer);
+        }
+
+        TryKillSelf();
+    }
+
+    private void TryKillSelf()
+    {
+        if (_killSelfOnExplode)
+        {
+            transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            }).Play();
         }
     }
 }
