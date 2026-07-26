@@ -17,10 +17,13 @@ public class ArcherBow : MonoBehaviour
     private CancellationTokenSource _handleBow;
     private float _bowAngle = 0f;
 
+    private bool _isDisabled;
     private void Start()
     {
         UniTaskTools.RenewToken(ref _handleBow);
         _archer.Bouncer.OnBounced.AddListener(OnBounced);
+        _archer.OnDisabled.AddListener(OnDisabled);
+        _archer.OnDisableEnd.AddListener(OnEnabledAgain);
 
         HandleBow(_handleBow.Token).Forget();
     }
@@ -28,6 +31,8 @@ public class ArcherBow : MonoBehaviour
     {
         UniTaskTools.KillToken(ref _handleBow);
         _archer.Bouncer.OnBounced.RemoveListener(OnBounced);
+        _archer.OnDisabled.RemoveListener(OnDisabled);
+        _archer.OnDisableEnd.RemoveListener(OnEnabledAgain);
     }
 
     private async UniTask HandleBow(CancellationToken token)
@@ -41,7 +46,8 @@ public class ArcherBow : MonoBehaviour
 
         while (token.IsCancellationRequested == false)
         {
-            Shoot();
+            if(_isDisabled == false)
+                Shoot();
             await UniTask.Delay(TimeSpan.FromSeconds(_shootCooldown), delayType: DelayType.DeltaTime);
         }
     }
@@ -62,9 +68,18 @@ public class ArcherBow : MonoBehaviour
 
         float radians = _bowAngle * Mathf.Deg2Rad;
         Vector2 direction = new Vector2(-Mathf.Sin(radians), Mathf.Cos(radians));
-        Debug.Log(_bowAngle);
-        Debug.Log(direction);
 
         arrow.Spawn(_archer.Bouncer.Team, direction);
+    }
+
+    public void OnDisabled(float time)
+    {
+        _isDisabled = true;
+        ////////// disable visual effect here ///////////
+    }
+    public void OnEnabledAgain()
+    {
+        _isDisabled = false;
+        ////////// Enable visual effect again ///////////
     }
 }
