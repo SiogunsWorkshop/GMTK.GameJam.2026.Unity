@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ArenaController : MonoBehaviour
 {
+    [field: SerializeField] public UnityEvent OnArenaCleared { get; private set; } = new();
+
     public List<EnvironmentalHazard> _environmentalHazards;
     public int CargoCount { get; set; }
     private readonly HashSet<EnvironmentalHazard> _activeHazards = new();
@@ -25,8 +28,9 @@ public class ArenaController : MonoBehaviour
     public void RerollEnvironmentalHazards()
     {
         _tutorialHazard.gameObject.SetActive(false);
-
         _rerollCount++;
+
+        OnArenaCleared.Invoke();
 
         if (HazardCount <= 0 || _environmentalHazards.Count == 0)
         {
@@ -53,19 +57,19 @@ public class ArenaController : MonoBehaviour
     }
 
     //My dum dum idea na inny spawn system.
-    //Na arenie s¹ spawnery, oko³o 15.
-    //Zielone to gdzie obiekt mo¿e siê spawniæ
-    //Czerwone to gdzie granice obiektu mog¹ siêgn¹æ (nie dok³adne bo twins jest very fat)
-    //W ka¿dej rundzie gracz jest teleportowany na dó³ mapy gdzie jest wolne miejsce
-    //Time stop dopóki gracz siê nie ruszy, ma chwile ¿eby siê zastanosiæ
-    //Spawnery s¹ zarówno dla cargo i hazzardów (arena spawnable)
-    //Spawnable maj¹ koszt, wszystkie s¹ na 1, a twins na 2 bo s¹ silne.
+    //Na arenie sï¿½ spawnery, okoï¿½o 15.
+    //Zielone to gdzie obiekt moï¿½e siï¿½ spawniï¿½
+    //Czerwone to gdzie granice obiektu mogï¿½ siï¿½gnï¿½ï¿½ (nie dokï¿½adne bo twins jest very fat)
+    //W kaï¿½dej rundzie gracz jest teleportowany na dï¿½ mapy gdzie jest wolne miejsce
+    //Time stop dopï¿½ki gracz siï¿½ nie ruszy, ma chwile ï¿½eby siï¿½ zastanosiï¿½
+    //Spawnery sï¿½ zarï¿½wno dla cargo i hazzardï¿½w (arena spawnable)
+    //Spawnable majï¿½ koszt, wszystkie sï¿½ na 1, a twins na 2 bo sï¿½ silne.
     //Cargo nie ma (assume 1)
-    //Co rerroll spawnione s¹ randomowe rzeczy z listy tak aby nie wyjœæ poza koszt
-    //Bud¿et cargo zwiêksza siê, kiedy _cargoDelay jest równy _cargoAddDelay. _cargoDelay zwiêkszany na reroll.
-    //(Tak ¿eby by³a wariacja spawnowania shitu)
-    //(Nie myœla³em o ratio hazzardów do cargo jak bêdzie ju¿ za ma³o spawnerów)
-    //(Mo¿na te¿ dodaæ jakieœ max wartoœci bud¿etów i guess)
+    //Co rerroll spawnione sï¿½ randomowe rzeczy z listy tak aby nie wyjï¿½ï¿½ poza koszt
+    //Budï¿½et cargo zwiï¿½ksza siï¿½, kiedy _cargoDelay jest rï¿½wny _cargoAddDelay. _cargoDelay zwiï¿½kszany na reroll.
+    //(Tak ï¿½eby byï¿½a wariacja spawnowania shitu)
+    //(Nie myï¿½laï¿½em o ratio hazzardï¿½w do cargo jak bï¿½dzie juï¿½ za maï¿½o spawnerï¿½w)
+    //(Moï¿½na teï¿½ dodaï¿½ jakieï¿½ max wartoï¿½ci budï¿½etï¿½w i guess)
     [SerializeField] private List<ArenaSpawner> _arenaSpawners = new();
     [SerializeField] private List<ArenaSpawnable> _hazzards = new();
     [SerializeField] private GameObject _cargoPrefab;
