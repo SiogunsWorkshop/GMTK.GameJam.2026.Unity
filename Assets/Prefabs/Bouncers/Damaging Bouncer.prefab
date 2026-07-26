@@ -72,6 +72,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8034563969944485018, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034563969944485018, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 754eb71ba241b4d4fb5ba9207e88c955, type: 2}
     m_RemovedComponents:
     - {fileID: 7193814893136833882, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
     m_RemovedGameObjects: []
