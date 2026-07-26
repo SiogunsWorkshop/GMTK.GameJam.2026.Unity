@@ -13,6 +13,7 @@ public class Explode : MonoBehaviour
 
     public void ExplodeNow()
     {
+        OnExplode.Invoke();
         var colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
 
         foreach (var collider in colliders)

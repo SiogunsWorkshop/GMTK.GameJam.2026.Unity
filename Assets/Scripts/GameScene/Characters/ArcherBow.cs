@@ -3,9 +3,12 @@ using DG.Tweening.Core.Easing;
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ArcherBow : MonoBehaviour
 {
+    [field: SerializeField] public UnityEvent OnShoot { get; set; } = new();
+
     [SerializeField] private EnemyMovement _archer;
     [SerializeField] private GameObject _spawnPivot;
     [SerializeField] private Transform _spawnPoint;
@@ -46,7 +49,7 @@ public class ArcherBow : MonoBehaviour
 
         while (token.IsCancellationRequested == false)
         {
-            if(_isDisabled == false)
+            if (_isDisabled == false)
                 Shoot();
             await UniTask.Delay(TimeSpan.FromSeconds(_shootCooldown), delayType: DelayType.DeltaTime);
         }
@@ -60,7 +63,7 @@ public class ArcherBow : MonoBehaviour
     {
         _bowAngle += _clockwise == false ? _angleChangeOnBounce : -_angleChangeOnBounce;
         _bowAngle = _bowAngle % 360;
-        gameObject.transform.rotation = Quaternion.Euler(0,0,_bowAngle);
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, _bowAngle);
     }
     private void Shoot()
     {
@@ -70,6 +73,8 @@ public class ArcherBow : MonoBehaviour
         Vector2 direction = new Vector2(-Mathf.Sin(radians), Mathf.Cos(radians));
 
         arrow.Spawn(_archer.Bouncer.Team, direction);
+
+        OnShoot.Invoke();
     }
 
     public void OnDisabled(float time)

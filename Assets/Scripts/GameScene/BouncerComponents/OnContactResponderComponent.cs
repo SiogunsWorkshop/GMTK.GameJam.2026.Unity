@@ -6,9 +6,12 @@ using UnityEngine.Events;
 public class OnContactResponderComponent : MonoBehaviour
 {
     [field: SerializeField] public UnityEvent<UniversalBouncer, UniversalBouncer> OnBounce { get; private set; } = new();
+    [field: SerializeField] public UnityEvent<UniversalBouncer> OnWallBounce { get; private set; } = new();
 
     [SerializeField] private UniversalBouncer _bouncer;
     [SerializeField] private Team _teamWhitelist = Team.None;
+
+    private const string WALL_TAG = "Wall";
 
     private void OnEnable()
     {
@@ -28,7 +31,13 @@ public class OnContactResponderComponent : MonoBehaviour
     private void HandleBounce(UniversalBouncer arg0, Collision2D arg1)
     {
         if (!arg1.collider.TryGetComponent(out UniversalBouncer otherBouncer))
+        {
+            if (arg1.collider.CompareTag(WALL_TAG))
+            {
+                OnWallBounce.Invoke(arg0);
+            }
             return;
+        }
 
         if (_teamWhitelist != Team.None && otherBouncer.Team != _teamWhitelist)
             return;

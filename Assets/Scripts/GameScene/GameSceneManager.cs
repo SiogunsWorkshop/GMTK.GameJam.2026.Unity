@@ -7,7 +7,6 @@ using Zenject;
 public class GameSceneManager : MonoBehaviour
 {
     [field: SerializeField] public UnityEvent OnDepotDelivery { get; private set; } = new();
-    [field: SerializeField] public UnityEvent OnPlayerDeath { get; private set; } = new();
 
     [SerializeField] private HealthComponent _playerHealthComponent;
 
