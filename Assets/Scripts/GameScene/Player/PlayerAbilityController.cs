@@ -69,11 +69,15 @@ public class PlayerAbilityController : MonoBehaviour, InputMap.IAbilitiesActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        /*
+        
         if (!context.performed || _isUsingAbility) return;
 
         _isUsingAbility = true;
         OnAbilityStarted.Invoke();
         _attack.TriggerAbility();
+
+        */
     }
 
     public void OnExplode(InputAction.CallbackContext context)
