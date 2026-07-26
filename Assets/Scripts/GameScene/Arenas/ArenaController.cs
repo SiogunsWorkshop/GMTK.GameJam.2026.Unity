@@ -73,12 +73,14 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private List<ArenaSpawner> _arenaSpawners = new();
     [SerializeField] private List<ArenaSpawnable> _hazzards = new();
     [SerializeField] private GameObject _cargoPrefab;
+#pragma warning disable CS0414 // Dodaj modyfikator tylko do odczytu
     private float _hazzardBudget = 1;
     private float _budgetIncrese = 0.65f;
     private float _cargoBudget = 1;
     private float _cargoIncrease = 1.5f;
     private int _cargoDelay = 0;
     private int _cargoAddDelay = 1;
+#pragma warning restore CS0414 // Dodaj modyfikator tylko do odczytu
 
 #if UNITY_EDITOR
     [ContextMenu("Collect Environmental Hazards From Children")]
