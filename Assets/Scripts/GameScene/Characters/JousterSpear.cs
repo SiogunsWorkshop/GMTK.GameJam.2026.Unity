@@ -1,9 +1,8 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using UnityEditor.Searcher;
 using UnityEngine;
 
-[RequireComponent (typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 public class JousterSpear : DamageComponent
 {
     [SerializeField] private EnemyMovement _jouster;
@@ -34,7 +33,7 @@ public class JousterSpear : DamageComponent
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(_isDisabled)
+        if (_isDisabled)
             return;
         if (!collision.gameObject.TryGetComponent(out HealthComponent otherHealth))
             return;
@@ -47,7 +46,7 @@ public class JousterSpear : DamageComponent
 
     private async UniTask HandleSpear(CancellationToken token)
     {
-        while(token.IsCancellationRequested == false)
+        while (token.IsCancellationRequested == false)
         {
             gameObject.transform.rotation = Quaternion.FromToRotation(Vector2.up, _jouster.MovementDirection);
             await UniTask.Yield(PlayerLoopTiming.Update);
