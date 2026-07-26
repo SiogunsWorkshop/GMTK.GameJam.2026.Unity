@@ -4,6 +4,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(UniversalBouncer))]
 public class Explode : MonoBehaviour
 {
+    public static UnityEvent OnAnyExplode { get; private set; } = new();
+
     [field: SerializeField] public UnityEvent OnExplode { get; private set; } = new();
     [field: SerializeField] public UnityEvent<UniversalBouncer> OnAffectedByExplosion { get; private set; } = new();
 
@@ -14,6 +16,7 @@ public class Explode : MonoBehaviour
     public void ExplodeNow()
     {
         OnExplode.Invoke();
+        OnAnyExplode.Invoke();
         var colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
 
         foreach (var collider in colliders)
