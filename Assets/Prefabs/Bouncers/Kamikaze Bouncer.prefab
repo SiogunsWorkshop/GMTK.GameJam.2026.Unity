@@ -83,6 +83,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6960876980367674382}
+    - targetCorrespondingSourceObject: {fileID: 6890443025487179665, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7644950241703261075}
   m_SourcePrefab: {fileID: 100100000, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}
 --- !u!1 &1570835857162941694 stripped
 GameObject:
@@ -104,7 +107,9 @@ MonoBehaviour:
   <OnExplode>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  _bouncer: {fileID: 5612305684192953769}
+  <OnAffectedByExplosion>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   _force: 40
   _radius: 5
   _forceFalloff:
@@ -172,6 +177,19 @@ MonoBehaviour:
         m_CallState: 2
   _bouncer: {fileID: 5612305684192953769}
   _teamWhitelist: 1
+--- !u!114 &7644950241703261075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570835857162941694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2ca01e3281cd744af12129bb24ab7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaSpawnable
+  _cost: 1
 --- !u!114 &5612305684192953769 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 554388914440609478, guid: 2c233769bd67b2948bc3f9b5fcbf7a0e, type: 3}

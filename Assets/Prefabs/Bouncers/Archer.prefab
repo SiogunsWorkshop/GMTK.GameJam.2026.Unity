@@ -1011,7 +1011,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 510481362665667506, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2292343294667561106}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8126533246131002740, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107477486275933916}
   m_SourcePrefab: {fileID: 100100000, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
 --- !u!4 &2265596107027818325 stripped
 Transform:
@@ -1023,9 +1026,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5262187630696822769, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
   m_PrefabInstance: {fileID: 1757701003077115111}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7540051971592946067}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c2dec1c389a72d49aad61b47fdef510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+--- !u!1 &7540051971592946067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8126533246131002740, guid: 99613353b612da549878a1e5e3f71dd3, type: 3}
+  m_PrefabInstance: {fileID: 1757701003077115111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &107477486275933916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7540051971592946067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2ca01e3281cd744af12129bb24ab7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaSpawnable
+  _cost: 1
