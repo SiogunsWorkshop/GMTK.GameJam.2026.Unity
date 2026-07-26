@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 5995082007803031194}
   - component: {fileID: 8325798649248228937}
   m_Layer: 0
-  m_Name: 1T-2K-1C
+  m_Name: 1T-1C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,8 +259,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7620533600115646822}
-  - {fileID: 1969545509883554948}
-  - {fileID: 8836652185985341877}
   - {fileID: 6024290317140615764}
   m_Father: {fileID: 3098992522045431449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1318,7 +1316,7 @@ GameObject:
   - component: {fileID: 4895705339940218780}
   - component: {fileID: 133740700526514176}
   m_Layer: 0
-  m_Name: 1T-1J-1C
+  m_Name: 1T-2C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1337,7 +1335,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7198393132715309974}
   - {fileID: 7541802423398916942}
   - {fileID: 2659500122237819177}
   m_Father: {fileID: 3098992522045431449}
@@ -1497,51 +1494,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &3085088444480657970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7198393132715309974}
-  - component: {fileID: 8367251613367425209}
-  m_Layer: 0
-  m_Name: J_Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7198393132715309974
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3085088444480657970}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.78, y: 1.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4895705339940218780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8367251613367425209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3085088444480657970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fb36bce53f58147a81b77a56f514c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BouncerSpawner
-  _bouncerPrefab: {fileID: 7669003815927164805, guid: ce6c24f1c45733649ae1f0bd3dfccde3, type: 3}
 --- !u!1 &3299599899892439204
 GameObject:
   m_ObjectHideFlags: 0
@@ -5112,51 +5064,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 28.31, y: 1}
   m_EdgeRadius: 0
---- !u!1 &6787682216011920180
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8836652185985341877}
-  - component: {fileID: 9125643823674501510}
-  m_Layer: 0
-  m_Name: KamiKazeSpawner (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8836652185985341877
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6787682216011920180}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.01, y: -1.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5995082007803031194}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9125643823674501510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6787682216011920180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fb36bce53f58147a81b77a56f514c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BouncerSpawner
-  _bouncerPrefab: {fileID: 1570835857162941694, guid: fdeece9b2552768469e8ccbf97eac8cb, type: 3}
 --- !u!1 &6883639303277695466
 GameObject:
   m_ObjectHideFlags: 0
@@ -6247,51 +6154,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7721828059275973565
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1969545509883554948}
-  - component: {fileID: 7320400370523712110}
-  m_Layer: 0
-  m_Name: KamiKazeSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1969545509883554948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721828059275973565}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.55, y: 0.84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5995082007803031194}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7320400370523712110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721828059275973565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fb36bce53f58147a81b77a56f514c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BouncerSpawner
-  _bouncerPrefab: {fileID: 1570835857162941694, guid: fdeece9b2552768469e8ccbf97eac8cb, type: 3}
 --- !u!1 &8017148848888274381
 GameObject:
   m_ObjectHideFlags: 0

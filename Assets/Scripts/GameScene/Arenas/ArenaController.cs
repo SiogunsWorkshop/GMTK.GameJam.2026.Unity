@@ -12,9 +12,11 @@ public class ArenaController : MonoBehaviour
 
     [SerializeField] private EnvironmentalHazard _tutorialHazard;
 
-    private int HazardCount => _rerollCount / _increaseHazardCountEveryNthReroll + 1;
-    private readonly int _increaseHazardCountEveryNthReroll = 2;
+    private int HazardCount => Mathf.Min(_rerollCount / _increaseHazardCountEveryNthReroll + 1, MAX_HAZARD_COUNT);
+    private readonly int _increaseHazardCountEveryNthReroll = 3;
     private int _rerollCount = 0;
+
+    private const int MAX_HAZARD_COUNT = 5;
 
     private void Awake()
     {
